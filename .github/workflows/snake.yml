@@ -1,5 +1,3 @@
-# Generates the animated contribution snake (pink version for Zahwa 💖).
-# Needs to run once manually (Actions tab → Run workflow) after setup.
 name: Generate snake animation
 
 on:
@@ -22,7 +20,7 @@ jobs:
         with:
           github_user_name: zahwanuraisyah
           outputs: |
-            dist/github-snake.svg?color_snake=#be185d&color_dots=#f9a8d4,#fbcfe8,#fce7f3
+            dist/github-snake.svg?color_snake=%23be185d&color_dots=%23f9a8d4,%23fbcfe8,%23fce7f3
             dist/github-snake-dark.svg?palette=github-dark
 
       - name: Push snake to the output branch
