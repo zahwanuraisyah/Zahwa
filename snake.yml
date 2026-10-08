@@ -1,0 +1,36 @@
+# Generates the animated contribution snake (pink version for Zahwa 💖).
+# Needs to run once manually (Actions tab → Run workflow) after setup.
+# ⚠️ GANTI username-zahwa dengan username GitHub Zahwa yang asli!
+name: Generate snake animation
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Generate the pink snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: username-zahwa
+          outputs: |
+            dist/github-snake.svg?color_snake=#be185d&color_dots=#f9a8d4,#fbcfe8,#fce7f3
+            dist/github-snake-dark.svg?palette=github-dark
+
+      - name: Push snake to the output branch
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: output
+          build_dir: dist
+          commit_message: "Update snake animation"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
